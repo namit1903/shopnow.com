@@ -2,7 +2,8 @@ const paypal = require("../../helpers/paypal");
 const Order = require("../../models/Order");
 const Cart = require("../../models/Cart");
 const Product = require("../../models/Product");
-
+const dotenv = require("dotenv");
+dotenv.config();
 const createOrder = async (req, res) => {
   try {
     const {
@@ -26,8 +27,10 @@ const createOrder = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: "http://localhost:5173/shop/paypal-return",
-        cancel_url: "http://localhost:5173/shop/paypal-cancel",
+          return_url: "http://localhost:5173/shop/paypal-return",
+  cancel_url: "http://localhost:5173/shop/paypal-cancel",
+      // return_url: `${process.env.FRONTEND_URL}/shop/paypal-return`,
+  // cancel_url: `${process.env.FRONTEND_URL}/shop/paypal-cancel`,
       },
       transactions: [
         {
@@ -36,12 +39,12 @@ const createOrder = async (req, res) => {
               name: item.title,
               sku: item.productId,
               price: item.price.toFixed(2),
-              currency: "INR",
+              currency: "USD",
               quantity: item.quantity,
             })),
           },
           amount: {
-            currency: "INR",
+            currency: "USD",
             total: totalAmount.toFixed(2),
           },
           description: "description",
@@ -50,6 +53,15 @@ const createOrder = async (req, res) => {
     };
 
     paypal.payment.create(create_payment_json, async (error, paymentInfo) => {
+      console.log("Create Payment Response--->",userId,
+      cartItems,
+      addressInfo,
+      orderStatus,
+      paymentMethod,
+      paymentStatus,
+      totalAmount,
+     
+  );
       if (error) {
         console.log(error);
 
