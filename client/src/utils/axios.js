@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api", // Common prefix
+  baseURL: "http://localhost:5000", // Common prefix
   headers: {
     "Content-Type": "application/json",
     // Add other default headers if needed
@@ -25,4 +25,4 @@ api.interceptors.request.use(
 );
 */
 
-export default api;
+export default backendApi;;
