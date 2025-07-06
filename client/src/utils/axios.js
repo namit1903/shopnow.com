@@ -1,7 +1,9 @@
-const axios = require("axios");
-
-const api = axios.create({
-  baseURL: "http://localhost:5000", // Common prefix
+import axios from "axios";
+// import dotenv from "dotenv";
+// const dotenv = require("dotenv");
+// dotenv.config();
+const backendApi = axios.create({
+  baseURL: `${import.meta.env.VITE_API_URL}`, // Common prefix
   headers: {
     "Content-Type": "application/json",
     // Add other default headers if needed
@@ -25,4 +27,4 @@ api.interceptors.request.use(
 );
 */
 
-export default backendApi;;
+export default backendApi;

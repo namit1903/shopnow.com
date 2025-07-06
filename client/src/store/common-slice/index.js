@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import backendApi from "../../utils/axios";
 
 const initialState = {
   isLoading: false,
@@ -9,8 +10,8 @@ const initialState = {
 export const getFeatureImages = createAsyncThunk(
   "/order/getFeatureImages",
   async () => {
-    const response = await axios.get(
-      `http://localhost:5000/api/common/feature/get`
+    const response = await backendApi.get(
+      `/api/common/feature/get`
     );
 
     return response.data;
@@ -21,8 +22,8 @@ export const addFeatureImage = createAsyncThunk(
   "/order/addFeatureImage",
   async (image) => {
     console.log("we are here so feature image is being added");
-    const response = await axios.post(
-      `http://localhost:5000/api/common/feature/add`,
+    const response = await backendApi.post(
+      `/api/common/feature/add`,
       { image }
     );
 
