@@ -26,7 +26,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+console.log("frontend url is -->",process.env.FRONTEND_URL);
 app.use(
   cors({
     origin: process.env.FRONTEND_URL ,
